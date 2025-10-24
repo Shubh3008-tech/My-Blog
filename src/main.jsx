@@ -83,7 +83,7 @@ const router = createBrowserRouter([
       },
       {
         // --- ADD THIS BASENAME PROPERTY ---
-        basename: "/blog-app", // Use your repository name
+        basename: "/My-Blog", // Use your repository name
         // --- END ---
       },
       // --- END OF NEW ROUTE ---
