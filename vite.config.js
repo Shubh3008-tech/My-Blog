@@ -4,7 +4,7 @@ import react from '@vitejs/plugin-react'
 // https://vitejs.dev/config/
 export default defineConfig({
   // --- ADD THIS LINE ---
-  base: '/blog-app/', // Use your repository name
+  base: '/My-Blog/', // Use your repository name
   // --- END ---
   plugins: [react()],
 })
