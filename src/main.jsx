@@ -6,7 +6,7 @@ import { Provider } from 'react-redux'
 import store from './store/store.js'
 import { RouterProvider, createBrowserRouter } from 'react-router-dom'
 import { AuthLayout } from './components/index.js'
-import { ThemeProvider } from './contexts/ThemeContext.js'
+import { ThemeProvider } from './contexts/ThemeContext.jsx'
 
 // Import different Pages
 import Home from './pages/Home.jsx'
