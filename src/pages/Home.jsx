@@ -7,7 +7,8 @@ function Home() {
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        dbService.getPosts([]).then((response) => { // Get all active posts
+        // Call with no arguments to use the default query (status == "active")
+        dbService.getPosts().then((response) => { 
             if (response) {
                 setPosts(response.documents);
             }
@@ -30,7 +31,7 @@ function Home() {
             <div className="w-full py-8 mt-4 text-center">
                 <Container>
                     <h1 className="text-2xl font-bold dark:text-white">
-                        No posts found. Login to add a post.
+                        No active posts found.
                     </h1>
                 </Container>
             </div>
