@@ -13,22 +13,17 @@ function Header() {
         { name: 'Home', slug: '/', active: true },
         { name: 'Login', slug: '/login', active: !authStatus },
         { name: 'Signup', slug: '/signup', active: !authStatus },
-        { name: 'All Posts', slug: '/all-posts', active: authStatus },
+        // --- THIS LINE IS CHANGED ---
+        { name: 'My Posts', slug: '/my-posts', active: authStatus },
+        // --- END OF CHANGE ---
         { name: 'Add Post', slug: '/add-post', active: authStatus },
     ];
 
     return (
         <header className='py-4 shadow bg-gray-100 dark:bg-gray-900 text-gray-800 dark:text-gray-200 sticky top-0 z-50'>
             <Container>
-                {/* RESPONSIVE LAYOUT:
-                  - On mobile (default): flex-col, items-center, with a gap-4
-                  - On desktop (md:): flex-row, justify-between
-                */}
                 <nav className='flex flex-col items-center gap-4 md:flex-row md:justify-between'>
                     
-                    {/* Top row on mobile / Left group on desktop 
-                      - This contains Logo AND Username
-                    */}
                     <div className='flex flex-col items-center gap-3 md:flex-row md:gap-4'>
                         <div className='flex-shrink-0'>
                             <Link to='/'>
@@ -48,9 +43,6 @@ function Header() {
                         )}
                     </div>
 
-                    {/* Bottom row on mobile / Right group on desktop
-                      - This contains nav links and buttons
-                    */}
                     <ul className='flex flex-wrap items-center justify-center gap-x-4 gap-y-2'>
                         {navItems.map((item) =>
                             item.active ? (

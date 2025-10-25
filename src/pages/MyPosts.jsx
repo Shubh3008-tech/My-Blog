@@ -5,7 +5,7 @@ import { useSelector } from 'react-redux' // 1. Import useSelector
 import { Query } from 'appwrite' // 2. Import Query
 import { Link } from 'react-router-dom' // 3. Import Link for a better empty state
 
-function AllPosts() {
+function MyPosts() {
     const [posts, setPosts] = useState([]);
     const [loading, setLoading] = useState(true);
     const userData = useSelector(state => state.auth.userData); // 4. Get user data
@@ -66,4 +66,4 @@ function AllPosts() {
     )
 }
 
-export default AllPosts
+export default MyPosts

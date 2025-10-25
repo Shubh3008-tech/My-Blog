@@ -6,13 +6,15 @@ import { Provider } from 'react-redux'
 import store from './store/store.js'
 import { RouterProvider, createBrowserRouter } from 'react-router-dom'
 import { AuthLayout } from './components/index.js'
-import { ThemeProvider } from './contexts/ThemeContext.jsx'
+import { ThemeProvider } from './contexts/ThemeContext.js'
 
 // Import Pages
 import Home from './pages/Home.jsx'
 import Login from './pages/Login.jsx'
 import Signup from './pages/Signup.jsx'
-import AllPosts from './pages/AllPosts.jsx'
+// --- THIS LINE IS CHANGED ---
+import MyPosts from './pages/MyPosts.jsx' // Was AllPosts.jsx
+// --- END OF CHANGE ---
 import AddPost from './pages/AddPost.jsx'
 import EditPost from './pages/EditPost.jsx'
 import Post from './pages/Post.jsx'
@@ -25,11 +27,11 @@ const router = createBrowserRouter([
     element: <App />,
     children: [
       {
-        index: true, // <-- CHANGED
+        index: true, 
         element: <Home />,
       },
       {
-        path: 'login', // <-- CHANGED (no leading slash)
+        path: 'login',
         element: (
           <AuthLayout authentication={false}>
             <Login />
@@ -37,23 +39,25 @@ const router = createBrowserRouter([
         ),
       },
       {
-        path: 'signup', // <-- CHANGED (no leading slash)
+        path: 'signup',
         element: (
           <AuthLayout authentication={false}>
             <Signup />
           </AuthLayout>
         ),
       },
+      // --- THIS BLOCK IS CHANGED ---
       {
-        path: 'all-posts', // <-- CHANGED (no leading slash)
+        path: 'my-posts', // Was 'all-posts'
         element: (
           <AuthLayout authentication>
-            <AllPosts />
+            <MyPosts /> {/* Was <AllPosts /> */}
           </AuthLayout>
         ),
       },
+      // --- END OF CHANGE ---
       {
-        path: 'add-post', // <-- CHANGED (no leading slash)
+        path: 'add-post',
         element: (
           <AuthLayout authentication>
             <AddPost />
@@ -61,7 +65,7 @@ const router = createBrowserRouter([
         ),
       },
       {
-        path: 'edit-post/:slug', // <-- CHANGED (no leading slash)
+        path: 'edit-post/:slug',
         element: (
           <AuthLayout authentication>
             <EditPost />
@@ -69,11 +73,11 @@ const router = createBrowserRouter([
         ),
       },
       {
-        path: 'post/:slug', // <-- CHANGED (no leading slash)
+        path: 'post/:slug',
         element: <Post />,
       },
       {
-        path: 'profile', // <-- CHANGED (no leading slash)
+        path: 'profile',
         element: (
           <AuthLayout authentication>
             <Profile />
@@ -83,7 +87,6 @@ const router = createBrowserRouter([
     ],
   },
 ], {
-  // This basename is correct and stays
   basename: "/My-Blog"
 })
 
