@@ -1,35 +1,35 @@
-import React from "react";
-import ReactDOM from "react-dom/client";
-import App from "./App.jsx";
-import "./index.css";
-import { Provider } from "react-redux";
-import store from "./store/store.js";
-import { RouterProvider, createBrowserRouter } from "react-router-dom";
-import { AuthLayout } from "./components/index.js";
-import { ThemeProvider } from "./contexts/ThemeContext.jsx";
+import React from 'react'
+import ReactDOM from 'react-dom/client'
+import App from './App.jsx'
+import './index.css'
+import { Provider } from 'react-redux'
+import store from './store/store.js'
+import { RouterProvider, createBrowserRouter } from 'react-router-dom'
+import { AuthLayout } from './components/index.js'
+import { ThemeProvider } from './contexts/ThemeContext.js'
 
 // Import Pages
-import Home from "./pages/Home.jsx";
-import Login from "./pages/Login.jsx";
-import Signup from "./pages/Signup.jsx";
-import AllPosts from "./pages/AllPosts.jsx";
-import AddPost from "./pages/AddPost.jsx";
-import EditPost from "./pages/EditPost.jsx";
-import Post from "./pages/Post.jsx";
-import Profile from "./pages/Profile.jsx"; // <-- 1. IMPORT THE NEW PAGE
+import Home from './pages/Home.jsx'
+import Login from './pages/Login.jsx'
+import Signup from './pages/Signup.jsx'
+import AllPosts from './pages/AllPosts.jsx'
+import AddPost from './pages/AddPost.jsx'
+import EditPost from './pages/EditPost.jsx'
+import Post from './pages/Post.jsx'
+import Profile from './pages/Profile.jsx'
 
 // Define the router
 const router = createBrowserRouter([
   {
-    path: "/",
+    path: '/',
     element: <App />,
     children: [
       {
-        path: "/",
+        index: true, // <-- CHANGED
         element: <Home />,
       },
       {
-        path: "/login",
+        path: 'login', // <-- CHANGED (no leading slash)
         element: (
           <AuthLayout authentication={false}>
             <Login />
@@ -37,7 +37,7 @@ const router = createBrowserRouter([
         ),
       },
       {
-        path: "/signup",
+        path: 'signup', // <-- CHANGED (no leading slash)
         element: (
           <AuthLayout authentication={false}>
             <Signup />
@@ -45,7 +45,7 @@ const router = createBrowserRouter([
         ),
       },
       {
-        path: "/all-posts",
+        path: 'all-posts', // <-- CHANGED (no leading slash)
         element: (
           <AuthLayout authentication>
             <AllPosts />
@@ -53,7 +53,7 @@ const router = createBrowserRouter([
         ),
       },
       {
-        path: "/add-post",
+        path: 'add-post', // <-- CHANGED (no leading slash)
         element: (
           <AuthLayout authentication>
             <AddPost />
@@ -61,7 +61,7 @@ const router = createBrowserRouter([
         ),
       },
       {
-        path: "/edit-post/:slug",
+        path: 'edit-post/:slug', // <-- CHANGED (no leading slash)
         element: (
           <AuthLayout authentication>
             <EditPost />
@@ -69,34 +69,30 @@ const router = createBrowserRouter([
         ),
       },
       {
-        path: "/post/:slug",
+        path: 'post/:slug', // <-- CHANGED (no leading slash)
         element: <Post />,
       },
-      // --- 2. ADD THIS NEW ROUTE ---
       {
-        path: "/profile",
+        path: 'profile', // <-- CHANGED (no leading slash)
         element: (
           <AuthLayout authentication>
             <Profile />
           </AuthLayout>
         ),
       },
-      {
-        // --- ADD THIS BASENAME PROPERTY ---
-        basename: "/My-Blog", // Use your repository name
-        // --- END ---
-      },
-      // --- END OF NEW ROUTE ---
     ],
   },
-]);
+], {
+  // This basename is correct and stays
+  basename: "/My-Blog"
+})
 
-ReactDOM.createRoot(document.getElementById("root")).render(
+ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <Provider store={store}>
       <ThemeProvider>
         <RouterProvider router={router} />
       </ThemeProvider>
     </Provider>
-  </React.StrictMode>
-);
+  </React.StrictMode>,
+)
