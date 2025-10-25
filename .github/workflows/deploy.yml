@@ -37,10 +37,17 @@ jobs:
           node-version: 20 # Use a current LTS version
 
       - name: Install dependencies
-        run: npm ci # 'ci' is faster and safer for automated builds
+        run: npm ci 
 
       - name: Build
-        run: npm run build # This will use the 'base' from vite.config.js
+        run: npm run build # This creates the 'dist' folder
+
+      # --- THIS IS THE NEW STEP ---
+      # This copies the built index.html to 404.html
+      # so all routes are handled by your app.
+      - name: Copy index.html to 404.html
+        run: cp ./dist/index.html ./dist/404.html
+      # --- END OF NEW STEP ---
 
       - name: Setup Pages
         uses: actions/configure-pages@v5
@@ -48,7 +55,7 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          # Upload the 'dist' folder (Vite's build output)
+          # Upload the 'dist' folder (which now contains 404.html)
           path: './dist'
 
       - name: Deploy to GitHub Pages
