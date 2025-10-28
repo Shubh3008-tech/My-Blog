@@ -1,21 +1,20 @@
 import React from 'react'
 import { Container, Logo, LogoutBtn } from '../index'
-import { Link, useNavigate } from 'react-router-dom'
+// 1. Import NavLink instead of just Link
+import { Link, NavLink, useNavigate } from 'react-router-dom' 
 import { useSelector } from 'react-redux'
 import ThemeBtn from './ThemeBtn';
 
 function Header() {
     const authStatus = useSelector((state) => state.auth.status);
     const userData = useSelector((state) => state.auth.userData);
-    const navigate = useNavigate();
+    const navigate = useNavigate(); // Still needed for LogoutBtn etc.
 
     const navItems = [
         { name: 'Home', slug: '/', active: true },
         { name: 'Login', slug: '/login', active: !authStatus },
         { name: 'Signup', slug: '/signup', active: !authStatus },
-        // --- THIS LINE IS CHANGED ---
         { name: 'My Posts', slug: '/my-posts', active: authStatus },
-        // --- END OF CHANGE ---
         { name: 'Add Post', slug: '/add-post', active: authStatus },
     ];
 
@@ -47,12 +46,20 @@ function Header() {
                         {navItems.map((item) =>
                             item.active ? (
                                 <li key={item.name}>
-                                    <button
-                                        onClick={() => navigate(item.slug)}
-                                        className='inline-block px-4 py-2 duration-200 hover:bg-blue-100 dark:hover:bg-gray-700 rounded-full'
+                                    {/* 2. Replace <button> with <NavLink> */}
+                                    <NavLink
+                                        to={item.slug}
+                                        // 3. Define styles for active/inactive links
+                                        className={({ isActive }) => `
+                                            inline-block px-4 py-2 rounded-full duration-200
+                                            ${isActive 
+                                                ? "bg-blue-100 dark:bg-gray-700 text-blue-700 dark:text-white font-semibold" 
+                                                : "hover:bg-blue-100 dark:hover:bg-gray-700"
+                                            }
+                                        `}
                                     >
                                         {item.name}
-                                    </button>
+                                    </NavLink>
                                 </li>
                             ) : null
                         )}
